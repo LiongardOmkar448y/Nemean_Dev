@@ -1,0 +1,308 @@
+# Test info
+
+- Name: @regressiontest1 Export file downloads correctly to Downloads folder
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:115:5
+
+# Error details
+
+```
+Error: locator.click: Test timeout of 40000ms exceeded.
+Call log:
+  - waiting for locator('//span[text()="Export"]')
+
+    at AccountPage.clickExportButton (C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\pages\AccountPage.js:100:29)
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:119:21
+```
+
+# Page snapshot
+
+```yaml
+- banner:
+  - heading "Liongard Dev" [level=3]
+  - list:
+    - listitem:
+      - img
+      - textbox "Search..."
+      - img
+    - listitem:
+      - link "question-circle Support":
+        - /url: "#"
+        - img "question-circle"
+        - text: Support
+    - listitem:
+      - link "Admin":
+        - /url: "#"
+    - listitem: Reporting
+    - listitem:
+      - button "CHAT WITH US"
+    - listitem:
+      - link "Omkar Yadav":
+        - /url: "#"
+    - listitem:
+      - img "bars"
+- complementary:
+  - paragraph: Account Settings
+  - menu:
+    - menuitem "Profile"
+    - menuitem "Password"
+    - menuitem "Multi-Factor Authentication"
+    - menuitem "Access Tokens"
+    - menuitem "My Liongard Instance"
+- heading "My Liongard Instance" [level=1]
+- text: Showing 1 - 5 of 5
+- button "arrows-alt Expand":
+  - img "arrows-alt"
+  - text: Expand
+- button "download Export":
+  - img "download"
+  - text: Export
+- button "reload Reset":
+  - img "reload"
+  - text: Reset
+- button "appstore Columns (2/2)":
+  - img "appstore"
+  - text: Columns (2/2)
+- switch "Display filter options"
+- text: Show Filter Options
+- table:
+  - rowgroup:
+    - row "Key Value":
+      - columnheader "Key":
+        - columnheader "Key":
+          - heading "Key" [level=5]
+        - separator
+      - columnheader "Value":
+        - columnheader "Value":
+          - heading "Value" [level=5]
+        - separator
+  - rowgroup:
+    - row:
+      - columnheader:
+        - textbox
+      - columnheader:
+        - textbox
+  - rowgroup:
+    - row "Application IP Address 34.216.160.126":
+      - cell "Application IP Address"
+      - cell "34.216.160.126"
+    - row "Integrations IP Address 34.213.242.229":
+      - cell "Integrations IP Address"
+      - cell "34.213.242.229"
+    - row "Region US West (Oregon)":
+      - cell "Region"
+      - cell "US West (Oregon)"
+    - row "Service Provider Name Liongard Dev":
+      - cell "Service Provider Name"
+      - cell "Liongard Dev"
+    - row "URL nemean.appdev.liongard.com":
+      - cell "URL"
+      - cell "nemean.appdev.liongard.com"
+    - row:
+      - cell
+```
+
+# Test source
+
+```ts
+   1 | const { BasePage } = require('../utils/BasePage');
+   2 | const { expect } = require('@playwright/test');  
+   3 |
+   4 | exports.AccountPage = class AccountPage extends BasePage {
+   5 |   constructor(page) {
+   6 |     super(page);
+   7 |     this.page = page;
+   8 |   }
+   9 |
+   10 |   // Locators
+   11 |   get firstNameField() {
+   12 |     return this.page.locator('//input[@id="FirstName"]');
+   13 |   }
+   14 |
+   15 |   get lastNameField() {
+   16 |     return this.page.locator('//input[@id="LastName"]');
+   17 |   }
+   18 |
+   19 |   get usernameField() {
+   20 |     return this.page.locator('//input[@id="Username"]');
+   21 |   }
+   22 |
+   23 |   get applyButton() {
+   24 |     return this.page.locator('//button[normalize-space()="Apply"]');
+   25 |   }
+   26 |
+   27 |     get colorThemeDropdown() {
+   28 |     return this.page.locator("//label[normalize-space()='Color Theme']//following::div[@class='ant-select-selector']");
+   29 |   }
+   30 |
+   31 |   get lightModeOption() {
+   32 |     return this.page.locator("//div[contains(@class,'ant-select-item-option-content')][normalize-space()='Light Mode']");
+   33 |   }
+   34 |
+   35 |   get darkModeOption() {
+   36 |     return this.page.locator("//div[contains(@class,'ant-select-item-option-content')][normalize-space()='Dark Mode']");
+   37 |   }
+   38 |     get allThemeOptions() {
+   39 |     return this.page.locator("//div[contains(@class,'ant-select-item-option-content')]");
+   40 |   }
+   41 | get receiveTechUpdatesToggle() {
+   42 |   return this.page.locator('//button[@id="ReceiveTechUpdates"]');
+   43 | }
+   44 | //-------------Access Token Validation
+   45 | get accessTokenMenuOption() {
+   46 |     return this.page.locator('//span[text()="Access Tokens"]'); 
+   47 |   }
+   48 |  get clickonGenerateTokens() {
+   49 |   return this.page.locator("//button[normalize-space()='GENERATE NEW TOKEN']");
+   50 | }
+   51 |
+   52 | get clickonAgentToken() {
+   53 |   return this.page.locator("//div[normalize-space()='Agent Install Token']");
+   54 | }
+   55 |
+   56 |  get successMsg()
+   57 |  {
+   58 |    return this.page.locator("//div[text()='Your Agent Install access key (access key ID and secret access key) has been created successfully.']");
+   59 |
+   60 |  }
+   61 |  get accessKeyIdLabel() {
+   62 |   return this.page.locator("//li[text()='Access Key Id: ']");
+   63 | }
+   64 |
+   65 | get accessKeySecretLabel() {
+   66 |   return this.page.locator('//li[text()="Access Key Secret: "]');
+   67 | }
+   68 |
+   69 |   get mfaMenu() {
+   70 |     return this.page.locator('//span[text()="Multi-Factor Authentication"]');
+   71 |   }
+   72 |
+   73 |   get mfaInfoText() {
+   74 |     return this.page.locator("//p[contains(., 'Multi-Factor authentication is') and contains(., 'for your account')]");
+   75 |   }
+   76 |
+   77 | get accessKeyIdTextLabel() {
+   78 |   return this.page.locator('//li[text()="Access Key Id: "]');
+   79 | }
+   80 |
+   81 | get accessKeySecretTextLabel() {
+   82 |   return this.page.locator('//li[text()="Access Key Secret: "]');
+   83 | }
+   84 |
+   85 |  get liongardInstanceMenu() {
+   86 |     return this.page.locator('//span[text()="My Liongard Instance"]');
+   87 |   }
+   88 |
+   89 |   get instanceRowLabels() {
+   90 |     return this.page.locator('//td[text()="Application IP Address" or text()="Integrations IP Address" or text()="Region" or text()="Service Provider Name" or text()="URL"]');
+   91 |   }
+   92 |
+   93 |
+   94 |
+   95 |  get exportButton() {
+   96 |     return this.page.locator('//span[text()="Export"]');
+   97 |   }
+   98 |
+   99 |  async clickExportButton() {
+> 100 |     await this.exportButton.click();
+      |                             ^ Error: locator.click: Test timeout of 40000ms exceeded.
+  101 |   }
+  102 |
+  103 |   async validateExportFileDownloaded() {
+  104 |     const downloadDir = path.join(os.homedir(), 'Downloads');
+  105 |
+  106 |     // Wait 3 seconds for download to complete
+  107 |     await this.page.waitForTimeout(3000);
+  108 |
+  109 |     // Get all files in Downloads folder
+  110 |     const files = fs.readdirSync(downloadDir);
+  111 |
+  112 |     // Find file that starts with "Export" (case-insensitive)
+  113 |     const exportFile = files.find(file => file.toLowerCase().startsWith('export'));
+  114 |
+  115 |     expect(exportFile, 'Export file should exist in Downloads folder').toBeTruthy();
+  116 |
+  117 |     const filePath = path.join(downloadDir, exportFile);
+  118 |     const stats = fs.statSync(filePath);
+  119 |
+  120 |     // ✅ Assert file is not empty
+  121 |     expect(stats.size).toBeGreaterThan(0);
+  122 |   }
+  123 |
+  124 |
+  125 |
+  126 |
+  127 |
+  128 |
+  129 |
+  130 |
+  131 |
+  132 |
+  133 |
+  134 |
+  135 |
+  136 |
+  137 |
+  138 |
+  139 |  async clickLiongardInstanceMenu() {
+  140 |     await this.liongardInstanceMenu.click();
+  141 |   }
+  142 |
+  143 |   async validateInstanceTableLabels() {
+  144 |     const expectedLabels = [
+  145 |       'Application IP Address',
+  146 |       'Integrations IP Address',
+  147 |       'Region',
+  148 |       'Service Provider Name',
+  149 |       'URL'
+  150 |     ];
+  151 |
+  152 |     await expect(this.instanceRowLabels).toHaveCount(5);       // Assert row count
+  153 |
+  154 |     for (const label of expectedLabels) {                       //  Assert each label is visible
+  155 |       const labelLocator = this.page.locator(`//td[text()="${label}"]`);
+  156 |       await expect(labelLocator).toBeVisible();
+  157 |     }
+  158 |   }
+  159 |
+  160 | async validateAccessKeyTextVisible() {                      //Method to validate both labels are visible (after token generation)
+  161 |   const keyIdText = await this.accessKeyIdTextLabel.textContent();
+  162 |   const keySecretText = await this.accessKeySecretTextLabel.textContent();
+  163 |
+  164 |   expect(keyIdText).toContain('Access Key Id:');
+  165 |   expect(keySecretText).toContain('Access Key Secret:');
+  166 | }
+  167 |
+  168 |
+  169 | async validateAccessKeyTextNotVisible() {                   //Method to validate both labels are hidden (after refresh)
+  170 |   await expect(this.accessKeyIdTextLabel).toBeHidden();
+  171 |   await expect(this.accessKeySecretTextLabel).toBeHidden();
+  172 | }
+  173 |
+  174 |
+  175 | async validateTokenSuccessMessage() {                       // Success message validation
+  176 |   await expect(this.successMsg).toBeVisible();
+  177 |   const actualText = await this.successMsg.textContent();
+  178 |   expect(actualText).toContain("Your Agent Install access key");
+  179 |   expect(actualText).toContain("has been created successfully");
+  180 | }
+  181 |
+  182 |
+  183 |
+  184 |   async clickMFAMenu() {
+  185 |     await this.mfaMenu.click();
+  186 |   }
+  187 |
+  188 |     async validateMFAInfo() {
+  189 |     await expect(this.mfaInfoText).toBeVisible();
+  190 |     const fullText = await this.mfaInfoText.textContent();
+  191 |     expect(fullText.trim()).toContain('Multi-Factor authentication is');
+  192 |     expect(fullText.trim()).toContain('inactive');
+  193 |     expect(fullText.trim()).toContain('for your account');
+  194 |     const classAttr = await this.mfaInfoText.getAttribute('class');
+  195 |     if (classAttr) {
+  196 |       expect(classAttr).toContain('inactive');
+  197 |     }
+  198 |   } 
+  199 |
+  200 |
+```

@@ -1,0 +1,80 @@
+# Test info
+
+- Name: @regression Validate that the Home Page title is correct, all menu options are available, and the user can successfully log out.
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\HomePage.spec.js:12:5
+
+# Error details
+
+```
+Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
+
+Locator: locator('//li[@id="account-menu"]//a[@class="clearfix dropdown-toggle"]')
+Expected: visible
+Received: <element(s) not found>
+Call log:
+  - expect.toBeVisible with timeout 5000ms
+  - waiting for locator('//li[@id="account-menu"]//a[@class="clearfix dropdown-toggle"]')
+
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\HomePage.spec.js:15:38
+```
+
+# Page snapshot
+
+```yaml
+- heading [level=1]
+- heading "Sign in to continue" [level=3]
+- textbox "Username or email"
+- textbox "Password"
+- link "Forgot your password?":
+  - /url: /forgot
+- link "Forgot your username?":
+  - /url: /forgot-username
+- button "Log in"
+- text: or
+- button "Sign in with SSO":
+  - img
+  - text: Sign in with SSO
+- paragraph: Liongard, Inc. © 2025
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 | import { LoginPage } from '../pages/LoginPage.js';
+   3 | import { HomePage } from '../pages/HomePage.js';
+   4 | import { config } from '../config/config.js';
+   5 | import { testData } from '../data/testData.js';
+   6 |
+   7 | test.beforeEach(async ({ page }) => {
+   8 |   await page.goto(`${config.baseURL}/login`);
+   9 |   const loginPage = new LoginPage(page);
+  10 |   await loginPage.login(config.username, config.password);
+  11 | });
+  12 | test('@regression Validate that the Home Page title is correct, all menu options are available, and the user can successfully log out.', async ({ page }) => {
+  13 |   const homePage = new HomePage(page);
+  14 |   await expect(page).toHaveTitle('Liongard | Relentless');
+> 15 |   await expect(homePage.accountMenu).toBeVisible();// Assert account menu is visible
+     |                                      ^ Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
+  16 |   await homePage.openAccountMenu(); // Click account menu to reveal dropdown options
+  17 |   await expect(homePage.accountSettings).toBeVisible();// Assert dropdown links are visible
+  18 |   await expect(homePage.companySettings).toBeVisible();
+  19 |   await expect(homePage.logoutLink).toBeVisible();
+  20 |   await homePage.clickonLogout(); // CLick On logout button
+  21 | });
+  22 |
+  23 | test('@regression Validate if the "Account Settings" option is clickable ', async ({ page }) => {
+  24 |   const homePage = new HomePage(page);
+  25 |   await homePage.openAccountMenu();
+  26 |   await page.waitForTimeout(5000); // waits for 5000 milliseconds = 5 seconds
+  27 |   await homePage.clickonAccountSetting();// Click account Setting
+  28 |    await page.waitForTimeout(5000); // waits for 5000 milliseconds = 5 seconds
+  29 |    
+  30 |
+  31 | });
+  32 |
+  33 |
+  34 |
+  35 |
+  36 |
+```

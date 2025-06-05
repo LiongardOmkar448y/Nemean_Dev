@@ -1,0 +1,448 @@
+# Test info
+
+- Name: @regression66 After generating a token, validate that the "Token Key" is visible and copyable
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:77:1
+
+# Error details
+
+```
+Error: expect(received).toContain(expected) // indexOf
+
+Expected substring: "Please store your key in a secure place"
+Received string:    "Your Agent Install access key (access key ID and secret access key) has been created successfully."
+    at AccountPage.validateSuccessMsg (C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\pages\AccountPage.js:73:22)
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:86:3
+```
+
+# Page snapshot
+
+```yaml
+- banner:
+  - heading "Liongard Dev" [level=3]
+  - list:
+    - listitem:
+      - img
+      - textbox "Search..."
+      - img
+    - listitem:
+      - link "question-circle Support":
+        - /url: "#"
+        - img "question-circle"
+        - text: Support
+    - listitem:
+      - link "Admin":
+        - /url: "#"
+    - listitem: Reporting
+    - listitem:
+      - button "CHAT WITH US"
+    - listitem:
+      - link "Omkar Yadav":
+        - /url: "#"
+    - listitem:
+      - img "bars"
+- complementary:
+  - paragraph: Account Settings
+  - menu:
+    - menuitem "Profile"
+    - menuitem "Password"
+    - menuitem "Multi-Factor Authentication"
+    - menuitem "Access Tokens"
+    - menuitem "My Liongard Instance"
+- heading "Access Tokens" [level=1]
+- list:
+  - listitem: API Tokens can be used to access the Liongard API.
+  - listitem: Agent Install Tokens can be used to install agents only.
+- button "GENERATE NEW TOKEN down":
+  - text: GENERATE NEW TOKEN
+  - img "down"
+- alert:
+  - img "info-circle"
+  - text: Your Agent Install access key (access key ID and secret access key) has been created successfully. Please store you key in a secure place and do not share it. You will not be able to get your secret again.
+  - list:
+    - listitem: "Access Key Id: 70ad7e99e9e0289cdfb6"
+    - listitem: "Access Key Secret: ce0b6be85f1a905a679797511682352ad46d4417a9753e308bdc0b46944a7c6f"
+  - button "close":
+    - img "close"
+- text: Showing 1 - 14 of 14
+- button "arrows-alt Expand":
+  - img "arrows-alt"
+  - text: Expand
+- button "download Export":
+  - img "download"
+  - text: Export
+- button "reload Reset":
+  - img "reload"
+  - text: Reset
+- button "appstore Columns (7/7)":
+  - img "appstore"
+  - text: Columns (7/7)
+- switch "Display filter options"
+- text: Show Filter Options
+- table:
+  - rowgroup:
+    - row "Actions Access Key ID Expires On Type Created On Status Last Used On":
+      - columnheader "Actions":
+        - columnheader "Actions":
+          - heading "Actions" [level=5]
+        - separator
+      - columnheader "Access Key ID":
+        - columnheader "Access Key ID":
+          - heading "Access Key ID" [level=5]
+        - separator
+      - columnheader "Expires On":
+        - columnheader "Expires On":
+          - heading "Expires On" [level=5]
+        - separator
+      - columnheader "Type":
+        - columnheader "Type":
+          - heading "Type" [level=5]
+        - separator
+      - columnheader "Created On":
+        - columnheader "Created On":
+          - heading "Created On" [level=5]
+        - separator
+      - columnheader "Status":
+        - columnheader "Status":
+          - heading "Status" [level=5]
+        - separator
+      - columnheader "Last Used On":
+        - columnheader "Last Used On":
+          - heading "Last Used On" [level=5]
+        - separator
+  - rowgroup:
+    - row "calendar calendar":
+      - columnheader
+      - columnheader:
+        - textbox
+      - columnheader:
+        - textbox
+      - columnheader:
+        - textbox
+      - columnheader "calendar":
+        - textbox "Select Date"
+        - img "calendar"
+      - columnheader
+      - columnheader "calendar":
+        - textbox "Select Date"
+        - img "calendar"
+  - rowgroup:
+    - row "386192d8f5753f9ada17 - Agent Install Mon 2025-06-02 19:10 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "386192d8f5753f9ada17"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 19:10 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "bcbbb75a3a777333f1a0 - Agent Install Mon 2025-06-02 19:08 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "bcbbb75a3a777333f1a0"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 19:08 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "8336245f67b10c269e42 - Agent Install Mon 2025-06-02 19:05 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "8336245f67b10c269e42"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 19:05 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "13b45785f7a0ea1ed1cb - Agent Install Mon 2025-06-02 19:02 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "13b45785f7a0ea1ed1cb"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 19:02 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "4c99604cd3e51b82e57d - Agent Install Mon 2025-06-02 18:50 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "4c99604cd3e51b82e57d"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 18:50 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "aa7e5817c312cb6e4cdd - Agent Install Mon 2025-06-02 18:49 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "aa7e5817c312cb6e4cdd"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 18:49 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "1884accf7450eaad8e06 - Agent Install Mon 2025-06-02 18:04 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "1884accf7450eaad8e06"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 18:04 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "6fa65777cbae27b0b11b - Agent Install Mon 2025-06-02 17:53 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "6fa65777cbae27b0b11b"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 17:53 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "f75c8db81484de8b717e - Agent Install Mon 2025-06-02 17:48 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "f75c8db81484de8b717e"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 17:48 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "0cdf7f1981485027365a - Agent Install Mon 2025-06-02 17:48 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "0cdf7f1981485027365a"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 17:48 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "5afe43facca257b49e97 - Agent Install Mon 2025-06-02 17:40 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "5afe43facca257b49e97"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 17:40 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "338b98867892f9f1de62 - Agent Install Mon 2025-06-02 17:40 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "338b98867892f9f1de62"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 17:40 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "219b8f378427d84fc222 - Agent Install Mon 2025-06-02 17:36 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "219b8f378427d84fc222"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 17:36 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row "70ad7e99e9e0289cdfb6 - Agent Install Mon 2025-06-02 19:12 GMT+0530 check -":
+      - cell:
+        - link:
+          - /url: "#"
+      - cell "70ad7e99e9e0289cdfb6"
+      - cell "-"
+      - cell "Agent Install"
+      - cell "Mon 2025-06-02 19:12 GMT+0530"
+      - cell "check":
+        - img "check"
+      - cell "-"
+    - row:
+      - cell
+- button "Previous" [disabled]
+- text: Page
+- spinbutton "jump to page": "1"
+- text: of 1
+- combobox:
+  - option "10 rows"
+  - option "25 rows" [selected]
+  - option "50 rows"
+  - option "100 rows"
+- button "Next" [disabled]
+```
+
+# Test source
+
+```ts
+   1 | const { BasePage } = require('../utils/BasePage');
+   2 | const { expect } = require('@playwright/test');  
+   3 |
+   4 | exports.AccountPage = class AccountPage extends BasePage {
+   5 |   constructor(page) {
+   6 |     super(page);
+   7 |     this.page = page;
+   8 |   }
+   9 |
+   10 |   // Locators
+   11 |   get firstNameField() {
+   12 |     return this.page.locator('//input[@id="FirstName"]');
+   13 |   }
+   14 |
+   15 |   get lastNameField() {
+   16 |     return this.page.locator('//input[@id="LastName"]');
+   17 |   }
+   18 |
+   19 |   get usernameField() {
+   20 |     return this.page.locator('//input[@id="Username"]');
+   21 |   }
+   22 |
+   23 |   get applyButton() {
+   24 |     return this.page.locator('//button[normalize-space()="Apply"]');
+   25 |   }
+   26 |
+   27 |     get colorThemeDropdown() {
+   28 |     return this.page.locator("//label[normalize-space()='Color Theme']//following::div[@class='ant-select-selector']");
+   29 |   }
+   30 |
+   31 |   get lightModeOption() {
+   32 |     return this.page.locator("//div[contains(@class,'ant-select-item-option-content')][normalize-space()='Light Mode']");
+   33 |   }
+   34 |
+   35 |   get darkModeOption() {
+   36 |     return this.page.locator("//div[contains(@class,'ant-select-item-option-content')][normalize-space()='Dark Mode']");
+   37 |   }
+   38 |     get allThemeOptions() {
+   39 |     return this.page.locator("//div[contains(@class,'ant-select-item-option-content')]");
+   40 |   }
+   41 | get receiveTechUpdatesToggle() {
+   42 |   return this.page.locator('//button[@id="ReceiveTechUpdates"]');
+   43 | }
+   44 | //-------------Access Token Validation
+   45 |
+   46 |
+   47 |
+   48 | get accessTokenMenuOption() {
+   49 |     return this.page.locator('//span[text()="Access Tokens"]'); // Change selector to your Access Token menu button
+   50 |   }
+   51 |  get clickonGenerateTokens() {
+   52 |   return this.page.locator("//button[normalize-space()='GENERATE NEW TOKEN']");
+   53 | }
+   54 |
+   55 | get clickonAgentToken() {
+   56 |   return this.page.locator("//div[normalize-space()='Agent Install Token']");
+   57 | }
+   58 |
+   59 |  get successMsg()
+   60 |  {
+   61 |    return this.page.locator("//div[text()='Your Agent Install access key (access key ID and secret access key) has been created successfully.']");
+   62 |
+   63 |  }
+   64 |
+   65 |
+   66 | async validateSuccessMsg() {
+   67 | //  await expect(this.successMsg).toBeVisible();
+   68 |
+   69 |   const actualText = await this.successMsg.textContent();
+   70 |
+   71 |   expect(actualText).toContain("Your Agent Install access key");
+   72 |   expect(actualText).toContain("has been created successfully");
+>  73 |   expect(actualText).toContain("Please store your key in a secure place");
+      |                      ^ Error: expect(received).toContain(expected) // indexOf
+   74 |   expect(actualText).toContain("You will not be able to get your secret again");
+   75 | }
+   76 |
+   77 |
+   78 |
+   79 |
+   80 | async clickAgentToken() {
+   81 |   await this.clickonAgentToken.waitFor({ state: 'visible' });
+   82 |   await this.clickonAgentToken.click({ force: true });
+   83 |
+   84 | }
+   85 |
+   86 |
+   87 | async clickGenerateToken() {
+   88 |     await this.clickonGenerateTokens.hover();
+   89 |   }
+   90 |
+   91 | async openAccessTokenMenu() {
+   92 |     await this.accessTokenMenuOption.click();
+   93 |   }
+   94 |
+   95 |
+   96 |
+   97 |
+   98 |
+   99 |
+  100 |
+  101 |  // Togle Button Validation -------------------------------------------------------------------------------
+  102 |  // Toggle the button
+  103 | async toggleReceiveTechUpdates() {
+  104 |   await this.receiveTechUpdatesToggle.click();
+  105 | }
+  106 |
+  107 | // Check current state (on = true / off = false)
+  108 | async isToggleOn() {
+  109 |   const ariaChecked = await this.receiveTechUpdatesToggle.getAttribute('aria-checked');
+  110 |   return ariaChecked === 'true';
+  111 | }
+  112 |
+  113 | // Ensure toggle is ON
+  114 | async ensureToggleIsOn() {
+  115 |   const isOn = await this.isToggleOn();
+  116 |   if (!isOn) {
+  117 |     await this.toggleReceiveTechUpdates();
+  118 |   }
+  119 | }
+  120 | // Ensure toggle is OFF
+  121 | async ensureToggleIsOff() {
+  122 |   const isOn = await this.isToggleOn();
+  123 |   if (isOn) {
+  124 |     await this.toggleReceiveTechUpdates();
+  125 |   }
+  126 | }
+  127 |  //------------------------------------------------------------------------------------------------------
+  128 |
+  129 |   async openColorThemeDropdown() {
+  130 |     await this.colorThemeDropdown.click();
+  131 |   }
+  132 |   async getThemeOptionsText() {
+  133 |     return this.allThemeOptions.allTextContents();
+  134 |   }
+  135 |
+  136 |   // Actions Clear the text and enter Name lastname and username and click on apply button
+  137 |   async fillAccountDetails(firstName, lastName, username) {
+  138 |     await this.firstNameField.fill('');
+  139 |     await this.firstNameField.fill(firstName);
+  140 |     await this.lastNameField.fill('');
+  141 |     await this.lastNameField.fill(lastName);
+  142 |     await this.usernameField.fill('');
+  143 |     await this.usernameField.fill(username);
+  144 |     await this.applyButton.click();
+  145 |   }
+  146 | };
+  147 |
+```

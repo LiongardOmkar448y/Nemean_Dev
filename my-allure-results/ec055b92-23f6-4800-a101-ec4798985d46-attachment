@@ -1,0 +1,63 @@
+# Test info
+
+- Name: @regression Validate Forgot Password Flow - Verify Password Reset Email Trigger
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\login.spec.js:20:1
+
+# Error details
+
+```
+Error: page.goto: Test timeout of 40000ms exceeded.
+Call log:
+  - navigating to "https://nemean.appdev.liongard.com/login", waiting until "load"
+
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\login.spec.js:8:14
+```
+
+# Test source
+
+```ts
+   1 | const { test, expect } = require('@playwright/test');
+   2 | const { LoginPage } = require('../pages/LoginPage');
+   3 | const config = require('../config/config');
+   4 | require('dotenv').config(); // Load env variables at the top
+   5 |
+   6 | test.beforeEach(async ({ page }) => {
+   7 |   // Navigate to login page before each test automatically
+>  8 |   await page.goto(config.baseURL + '/login');
+     |              ^ Error: page.goto: Test timeout of 40000ms exceeded.
+   9 | });
+  10 |
+  11 | test('@regression Login Test', async ({ page }) => {
+  12 |   const loginPage = new LoginPage(page);
+  13 |   // No need to call navigateTo anymore here
+  14 |   await loginPage.login(config.username, config.password);
+  15 |   // Add your assertions here
+  16 |   await expect(page).toHaveTitle('Liongard | Relentless');
+  17 |
+  18 | });
+  19 |
+  20 | test('@regression Validate Forgot Password Flow - Verify Password Reset Email Trigger', async ({ page }) => {
+  21 |   const baseUrl = process.env.BASE_URL;
+  22 |   const username = process.env.USERNAME;
+  23 |   await page.goto(`${baseUrl}/login`);
+  24 |   const loginPage = new LoginPage(page);
+  25 |   await loginPage.clickForgotPasswordLink();
+  26 |   await loginPage.clickBackButton();
+  27 |   await loginPage.enterUsername('omkar.yadav@liongard.com'); // Use valid test user
+  28 |   await loginPage.clickSubmitButton();
+  29 |   await loginPage.verifySuccessMessageVisible();
+  30 | });
+  31 |
+  32 | test('@regression Validate Forgot Username Flow - Verify Password Reset Email Trigger', async ({ page }) => {
+  33 |   const baseUrl = process.env.BASE_URL;
+  34 |   const username = process.env.Name;
+  35 |   await page.goto(`${baseUrl}/login`);
+  36 |   const loginPage = new LoginPage(page);
+  37 |   await loginPage.clickForgotUsernameLink();
+  38 |   await loginPage.clickBackButton();
+  39 |   await loginPage.enterEmail(username); 
+  40 |   await loginPage.clickSubmitButton();
+  41 |   await loginPage.verifySuccessMessageVisible();
+  42 |
+  43 | });
+```

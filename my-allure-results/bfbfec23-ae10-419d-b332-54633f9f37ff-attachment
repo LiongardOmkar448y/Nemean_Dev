@@ -1,0 +1,128 @@
+# Test info
+
+- Name: @regression Validate Account Details fields and fill the form
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:21:1
+
+# Error details
+
+```
+Error: locator.fill: Test timeout of 40000ms exceeded.
+Call log:
+  - waiting for locator('//input[@id="Username or email"]')
+
+    at LoginPage.login (C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\pages\LoginPage.js:82:30)
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:18:19
+```
+
+# Page snapshot
+
+```yaml
+- heading [level=1]
+- heading "Sign in to continue" [level=3]
+- textbox "Username or email"
+- textbox "Password"
+- link "Forgot your password?":
+  - /url: /forgot
+- link "Forgot your username?":
+  - /url: /forgot-username
+- button "Log in"
+- text: or
+- button "Sign in with SSO":
+  - img
+  - text: Sign in with SSO
+- paragraph: Liongard, Inc. © 2025
+```
+
+# Test source
+
+```ts
+   1 | const { BasePage } = require('../utils/BasePage');
+   2 |
+   3 | exports.LoginPage = class LoginPage extends BasePage {
+   4 |   constructor(page) {
+   5 |     super(page);
+   6 |     this.page = page;
+   7 |   }
+   8 |
+   9 |   get usernameField() {
+  10 |     return this.page.locator('//input[@id="Username"]');
+  11 |   }
+  12 |
+  13 |   get passwordField() {
+  14 |     return this.page.locator('//input[@id="Password"]');
+  15 |   }
+  16 |
+  17 |   get loginButton() {
+  18 |     return this.page.locator('//button[@type="submit"]');
+  19 |   }
+  20 |
+  21 | get forgotPasswordLink() {
+  22 |     return this.page.locator("//a[normalize-space()='Forgot your password?']");
+  23 |   }
+  24 |
+  25 |   get backButton() {
+  26 |     return this.page.locator("//div[@class='back-button']");
+  27 |   }
+  28 |
+  29 |   get usernameField() {
+  30 |     return this.page.locator('//input[@id="Username or email"]');
+  31 |   }
+  32 |
+  33 |   get submitButton() {
+  34 |     return this.page.locator('//button[@type="submit"]');
+  35 |   }
+  36 |
+  37 |    get successMessage() {
+  38 |     return this.page.locator('text=If the username you provided exists in Liongard, you will receive a password reset email.');
+  39 |   }
+  40 |    get forgotUserNameLink() {
+  41 |     return this.page.locator("//a[normalize-space()='Forgot your password?']");
+  42 |   }
+  43 |    get userEmailField() {
+  44 |     return this.page.locator("input.ant-input[type='text']");
+  45 |
+  46 |   }
+  47 |
+  48 |     async clickForgotUsernameLink() {
+  49 |     await this.forgotUserNameLink.click();
+  50 |   }
+  51 |   async clickBackButton() {
+  52 |     await this.backButton.click();
+  53 |   }
+  54 |    async enterEmail(username) {
+  55 |    await this.userEmailField.waitFor({ state: 'visible', timeout: 10000 });
+  56 |    await this.userEmailField.fill(username);
+  57 |   }
+  58 |   async clickSubmitButton() {
+  59 |     await this.submitButton.click();
+  60 |   }
+  61 |     async clickForgotPasswordLink() {
+  62 |     await this.forgotPasswordLink.click();
+  63 |   }
+  64 |
+  65 |   async clickBackButton() {
+  66 |     await this.backButton.click();
+  67 |   }
+  68 |
+  69 |   async enterUsername(username) {
+  70 |     await this.usernameField.fill(username);
+  71 |   }
+  72 |
+  73 |   async clickSubmitButton() {
+  74 |     await this.submitButton.click();
+  75 |   }
+  76 |
+  77 |   async verifySuccessMessageVisible() {
+  78 |     await this.successMessage.waitFor({ state: 'visible' });
+  79 |   }
+  80 |
+  81 |   async login(username, password) {
+> 82 |     await this.usernameField.fill(username);
+     |                              ^ Error: locator.fill: Test timeout of 40000ms exceeded.
+  83 |     await this.passwordField.fill(password);
+  84 |     await this.loginButton.click();
+  85 |   }
+  86 | };
+  87 |
+  88 |
+```

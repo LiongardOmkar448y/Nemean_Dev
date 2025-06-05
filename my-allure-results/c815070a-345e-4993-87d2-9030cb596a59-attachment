@@ -1,0 +1,123 @@
+# Test info
+
+- Name: @regression88 Validate Forgot Username Flow - Verify Password Reset Email Trigger
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\login.spec.js:32:1
+
+# Error details
+
+```
+Error: locator.fill: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('//input[@id=\'Email\']')
+
+    at LoginPage.enterEmail (C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\pages\LoginPage.js:68:31)
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\login.spec.js:39:19
+```
+
+# Test source
+
+```ts
+   1 | const { BasePage } = require('../utils/BasePage');
+   2 |
+   3 | exports.LoginPage = class LoginPage extends BasePage {
+   4 |   constructor(page) {
+   5 |     super(page);
+   6 |     this.page = page;
+   7 |   }
+   8 |
+   9 |   get usernameField() {
+   10 |     return this.page.locator('//input[@id="Username"]');
+   11 |   }
+   12 |
+   13 |   get passwordField() {
+   14 |     return this.page.locator('//input[@id="Password"]');
+   15 |   }
+   16 |
+   17 |   get loginButton() {
+   18 |     return this.page.locator('//button[@type="submit"]');
+   19 |   }
+   20 | //----------------------------------ForgetPass----------------------------------
+   21 |
+   22 | get forgotPasswordLink() {
+   23 |     return this.page.locator("//a[normalize-space()='Forgot your password?']");
+   24 |   }
+   25 |
+   26 |   get backButton() {
+   27 |     return this.page.locator("//div[@class='back-button']");
+   28 |   }
+   29 |
+   30 |   get usernameField() {
+   31 |     return this.page.locator('//input[@id="Username or email"]');
+   32 |   }
+   33 |
+   34 |   get submitButton() {
+   35 |     return this.page.locator('//button[@type="submit"]');
+   36 |   }
+   37 |
+   38 |
+   39 |    get successMessage() {
+   40 |     return this.page.locator('text=If the username you provided exists in Liongard, you will receive a password reset email.');
+   41 |   }
+   42 | //----------------------------------Username----------------------------------
+   43 |
+   44 | //a[normalize-space()='Forgot your username?']
+   45 |
+   46 |
+   47 | get forgotUserNameLink() {
+   48 |     return this.page.locator("//a[normalize-space()='Forgot your password?']");
+   49 |   }
+   50 |
+   51 |   get backButton() {
+   52 |     return this.page.locator("//div[@class='back-button']");
+   53 |   }
+   54 |    get userEmailField() {
+   55 |     return this.page.locator("//input[@id='Email']");
+   56 |   }
+   57 |    get submitButton() {
+   58 |     return this.page.locator('//button[@type="submit"]');
+   59 |   }
+   60 |
+   61 |     async clickForgotUsernameLink() {
+   62 |     await this.forgotUserNameLink.click();
+   63 |   }
+   64 |   async clickBackButton() {
+   65 |     await this.backButton.click();
+   66 |   }
+   67 |    async enterEmail(username) {
+>  68 |     await this.userEmailField.fill(username);
+      |                               ^ Error: locator.fill: Target page, context or browser has been closed
+   69 |   }
+   70 |   async clickSubmitButton() {
+   71 |     await this.submitButton.click();
+   72 |   }
+   73 | //-----------------------------------------------------------
+   74 |     async clickForgotPasswordLink() {
+   75 |     await this.forgotPasswordLink.click();
+   76 |   }
+   77 |
+   78 |   async clickBackButton() {
+   79 |     await this.backButton.click();
+   80 |   }
+   81 |
+   82 |   async enterUsername(username) {
+   83 |     await this.usernameField.fill(username);
+   84 |   }
+   85 |
+   86 |   async clickSubmitButton() {
+   87 |     await this.submitButton.click();
+   88 |   }
+   89 |
+   90 |   async verifySuccessMessageVisible() {
+   91 |     await this.successMessage.waitFor({ state: 'visible' });
+   92 |   }
+   93 |
+   94 | //-------------------------------------------------------------------
+   95 |   async login(username, password) {
+   96 |     await this.usernameField.fill(username);
+   97 |     await this.passwordField.fill(password);
+   98 |     await this.loginButton.click();
+   99 |   }
+  100 | };
+  101 |
+  102 |
+```

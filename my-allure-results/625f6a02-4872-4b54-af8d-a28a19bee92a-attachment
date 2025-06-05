@@ -1,0 +1,150 @@
+# Test info
+
+- Name: @regression Validate Account Details fields and fill the form
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:22:5
+
+# Error details
+
+```
+Error: locator.fill: Test timeout of 40000ms exceeded.
+Call log:
+  - waiting for locator('//input[@id="FirstName"]')
+
+    at AccountPage.fillAccountDetails (C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\pages\AccountPage.js:137:31)
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:26:21
+```
+
+# Page snapshot
+
+```yaml
+- heading [level=1]
+- heading "Sign in to continue" [level=3]
+- textbox "Username or email"
+- textbox "Password"
+- link "Forgot your password?":
+  - /url: /forgot
+- link "Forgot your username?":
+  - /url: /forgot-username
+- button "Log in"
+- text: or
+- button "Sign in with SSO":
+  - img
+  - text: Sign in with SSO
+- paragraph: Liongard, Inc. © 2025
+```
+
+# Test source
+
+```ts
+   37 |   }
+   38 |     get allThemeOptions() {
+   39 |     return this.page.locator("//div[contains(@class,'ant-select-item-option-content')]");
+   40 |   }
+   41 | get receiveTechUpdatesToggle() {
+   42 |   return this.page.locator('//button[@id="ReceiveTechUpdates"]');
+   43 | }
+   44 | //-------------Access Token Validation
+   45 | get accessTokenMenuOption() {
+   46 |     return this.page.locator('//span[text()="Access Tokens"]'); // Change selector to your Access Token menu button
+   47 |   }
+   48 |  get clickonGenerateTokens() {
+   49 |   return this.page.locator("//button[normalize-space()='GENERATE NEW TOKEN']");
+   50 | }
+   51 |
+   52 | get clickonAgentToken() {
+   53 |   return this.page.locator("//div[normalize-space()='Agent Install Token']");
+   54 | }
+   55 |
+   56 |  get successMsg()
+   57 |  {
+   58 |    return this.page.locator("//div[text()='Your Agent Install access key (access key ID and secret access key) has been created successfully.']");
+   59 |
+   60 |  }
+   61 |  get accessKeyIdLabel() {
+   62 |   return this.page.locator("//li[text()='Access Key Id: ']");
+   63 | }
+   64 |
+   65 | get accessKeySecretLabel() {
+   66 |   return this.page.locator('//li[text()="Access Key Secret: "]');
+   67 | }
+   68 |
+   69 | async validateAccessKeyLabels() {
+   70 |   const keyIdText = await this.accessKeyIdLabel.textContent();
+   71 |   const keySecretText = await this.accessKeySecretLabel.textContent();
+   72 |
+   73 |   // Assertions    // Validate Access Key ID and Secret labels
+   74 |   expect(keyIdText).toContain('Access Key Id:');
+   75 |   expect(keySecretText).toContain('Access Key Secret:');
+   76 | }
+   77 |
+   78 | async validateSuccessMsg() {
+   79 |   await expect(this.successMsg).toBeVisible();
+   80 |   const isVisible = await this.successMsg.isVisible();
+   81 |   expect(isVisible).toBe(true);
+   82 |   const actualText = await this.successMsg.textContent();      // Extract text content
+   83 |   expect(actualText).toContain("Your Agent Install access key");   // Validate the expected message content
+   84 |   expect(actualText).toContain("has been created successfully");
+   85 |   
+   86 | }
+   87 | async clickAgentToken() {
+   88 |   await this.clickonAgentToken.waitFor({ state: 'visible' });
+   89 |   await this.clickonAgentToken.click({ force: true });
+   90 | }
+   91 |
+   92 | async clickGenerateToken() {
+   93 |     await this.clickonGenerateTokens.hover();
+   94 |   }
+   95 |
+   96 | async openAccessTokenMenu() {
+   97 |     await this.accessTokenMenuOption.click();
+   98 |   }
+   99 |
+  100 |  // Togle Button Validation -------------------------------------------------------------------------------
+  101 |  // Toggle the button
+  102 | async toggleReceiveTechUpdates() {
+  103 |   await this.receiveTechUpdatesToggle.click();
+  104 | }
+  105 |
+  106 | // Check current state (on = true / off = false)
+  107 | async isToggleOn() {
+  108 |   const ariaChecked = await this.receiveTechUpdatesToggle.getAttribute('aria-checked');
+  109 |   return ariaChecked === 'true';
+  110 | }
+  111 |
+  112 | // Ensure toggle is ON
+  113 | async ensureToggleIsOn() {
+  114 |   const isOn = await this.isToggleOn();
+  115 |   if (!isOn) {
+  116 |     await this.toggleReceiveTechUpdates();
+  117 |   }
+  118 | }
+  119 | // Ensure toggle is OFF
+  120 | async ensureToggleIsOff() {
+  121 |   const isOn = await this.isToggleOn();
+  122 |   if (isOn) {
+  123 |     await this.toggleReceiveTechUpdates();
+  124 |   }
+  125 | }
+  126 |  //------------------------------------------------------------------------------------------------------
+  127 |
+  128 |   async openColorThemeDropdown() {
+  129 |     await this.colorThemeDropdown.click();
+  130 |   }
+  131 |   async getThemeOptionsText() {
+  132 |     return this.allThemeOptions.allTextContents();
+  133 |   }
+  134 |
+  135 |   // Actions Clear the text and enter Name lastname and username and click on apply button
+  136 |   async fillAccountDetails(firstName, lastName, username) {
+> 137 |     await this.firstNameField.fill('');
+      |                               ^ Error: locator.fill: Test timeout of 40000ms exceeded.
+  138 |     await this.firstNameField.fill(firstName);
+  139 |     await this.lastNameField.fill('');
+  140 |     await this.lastNameField.fill(lastName);
+  141 |     await this.usernameField.fill('');
+  142 |     await this.usernameField.fill(username);
+  143 |     await this.applyButton.click();
+  144 |   }
+  145 | };
+  146 |
+```

@@ -1,0 +1,94 @@
+# Test info
+
+- Name: @regressionhh Login Test
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\login.spec.js:16:5
+
+# Error details
+
+```
+Error: Timed out 5000ms waiting for expect(locator).toHaveTitle(expected)
+
+Locator: locator(':root')
+Expected string: "Liongard | Relentless"
+Received string: "Login | Liongard | Relentless"
+Call log:
+  - expect.toHaveTitle with timeout 5000ms
+  - waiting for locator(':root')
+    8 × locator resolved to <html lang="en">…</html>
+      - unexpected value "Login | Liongard | Relentless"
+
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\login.spec.js:21:22
+```
+
+# Page snapshot
+
+```yaml
+- heading [level=1]
+- heading "Sign in to continue" [level=3]
+- textbox "Username or email"
+- textbox "Password"
+- link "Forgot your password?":
+  - /url: /forgot
+- link "Forgot your username?":
+  - /url: /forgot-username
+- button "Log in"
+- text: or
+- button "Sign in with SSO":
+  - img
+  - text: Sign in with SSO
+- paragraph: Liongard, Inc. © 2025
+```
+
+# Test source
+
+```ts
+   1 | // ✅ Correct for ESM
+   2 | import { test, expect } from '@playwright/test';
+   3 | import { LoginPage } from '../pages/LoginPage.js';
+   4 | import { config } from '../config/config.js'; // Assuming config.js uses `export const config = {...}`
+   5 |
+   6 |
+   7 | require('dotenv').config(); // Load env variables at the top
+   8 |
+   9 | test.beforeEach(async ({ page }) => {
+  10 |   // Navigate to login page before each test au
+  11 |   await page.goto(config.baseURL + '/login');
+  12 |  // await loginPage.login(config.username, config.password);
+  13 |     
+  14 | });
+  15 |
+  16 | test('@regressionhh Login Test', async ({ page }) => {
+  17 |   const loginPage = new LoginPage(page);
+  18 |   // No need to call navigateTo anymore here
+  19 |   //await loginPage.login(config.username, config.password);
+  20 |   // Add your assertions here
+> 21 |   await expect(page).toHaveTitle('Liongard | Relentless');
+     |                      ^ Error: Timed out 5000ms waiting for expect(locator).toHaveTitle(expected)
+  22 |
+  23 | });
+  24 |
+  25 | test('@regression Validate Forgot Password Flow - Verify Password Reset Email Trigger', async ({ page }) => {
+  26 |   const baseUrl = process.env.BASE_URL;
+  27 |   const username = process.env.USERNAME;
+  28 |   await page.goto(`${baseUrl}/login`);
+  29 |   const loginPage = new LoginPage(page);
+  30 |   await loginPage.clickForgotPasswordLink();
+  31 |   await loginPage.clickBackButton();
+  32 |   await loginPage.enterUsername('omkar.yadav@liongard.com'); // Use valid test user
+  33 |   await loginPage.clickSubmitButton();
+  34 |   await loginPage.verifySuccessMessageVisible();
+  35 | });
+  36 |
+  37 | test('@regression88 Validate Forgot Username Flow - Verify usernmae Reset Email Trigger', async ({ page }) => {
+  38 |   const baseUrl = process.env.BASE_URL;
+  39 |   const username = process.env.Name;
+  40 |   await page.goto(`${baseUrl}/login`);
+  41 |   const loginPage = new LoginPage(page);
+  42 |   await loginPage.clickForgotUsernameLink();
+  43 |   await loginPage.clickBackButton();
+  44 |   await loginPage.enterEmail(username); 
+  45 |   await loginPage.clickSubmitButton();
+  46 |   await loginPage.verifySuccessMessageVisible();
+  47 |
+  48 | });
+```

@@ -122,3 +122,24 @@ Notify the team after test completion via Slack/Email APIs.
 ---
 
 > Add features incrementally and keep the framework modular and DRY (Don't Repeat Yourself).
+
+
+# 🚀 Playwright Automation Framework – Liongard Project
+
+This repository contains an end-to-end automation framework built using [Playwright](https://playwright.dev/).  
+It follows the **Page Object Model (POM)** design pattern and supports **Allure reporting**, **test tagging**, and **CI/CD readiness**.
+
+---
+
+## 📦 Prerequisites
+
+Ensure the following tools are installed on your machine:
+
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [Git](https://git-scm.com/)
+- VS Code (optional but recommended)
+
+---
+
+## 📁 Project Structure Overview
+

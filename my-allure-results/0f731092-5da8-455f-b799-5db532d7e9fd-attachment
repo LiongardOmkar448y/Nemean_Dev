@@ -1,0 +1,93 @@
+# Test info
+
+- Name: @regression Validate that the Home Page title is correct, all menu options are available, and the user can successfully log out.
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\HomePage.spec.js:13:1
+
+# Error details
+
+```
+Error: Timed out 5000ms waiting for expect(locator).toHaveTitle(expected)
+
+Locator: locator(':root')
+Expected string: "Liongard | Relentless"
+Received string: "Login | Liongard | Relentless"
+Call log:
+  - expect.toHaveTitle with timeout 5000ms
+  - waiting for locator(':root')
+    9 × locator resolved to <html lang="en">…</html>
+      - unexpected value "Login | Liongard | Relentless"
+
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\HomePage.spec.js:18:22
+```
+
+# Page snapshot
+
+```yaml
+- heading [level=1]
+- heading "Sign in to continue" [level=3]
+- textbox "Username or email"
+- textbox "Password"
+- link "Forgot your password?":
+  - /url: /forgot
+- link "Forgot your username?":
+  - /url: /forgot-username
+- button "Log in"
+- text: or
+- button "Sign in with SSO":
+  - img
+  - text: Sign in with SSO
+- paragraph: Liongard, Inc. © 2025
+```
+
+# Test source
+
+```ts
+   1 | const { test, expect } = require('@playwright/test');
+   2 | const { LoginPage } = require('../pages/LoginPage');
+   3 | const { HomePage } = require('../pages/HomePage');
+   4 | const config = require('../config/config');
+   5 | const testData = require('../data/testData');
+   6 |
+   7 | test.beforeEach(async ({ page }) => {
+   8 |   await page.goto(config.baseURL + '/login');
+   9 |   const loginPage = new LoginPage(page);
+  10 |   await loginPage.login(config.username, config.password);
+  11 | });
+  12 |
+  13 | test('@regression Validate that the Home Page title is correct, all menu options are available, and the user can successfully log out.', async ({ page }) => {
+  14 |   const homePage = new HomePage(page);
+  15 |
+  16 |   // Assert page t
+  17 |   // itle
+> 18 |   await expect(page).toHaveTitle('Liongard | Relentless');
+     |                      ^ Error: Timed out 5000ms waiting for expect(locator).toHaveTitle(expected)
+  19 |
+  20 |   // Assert account menu is visible
+  21 |   await expect(homePage.accountMenu).toBeVisible();
+  22 |
+  23 |   // Click account menu to reveal dropdown options
+  24 |   await homePage.openAccountMenu();
+  25 |
+  26 |   // Assert dropdown links are visible
+  27 |   await expect(homePage.accountSettings).toBeVisible();
+  28 |   await expect(homePage.companySettings).toBeVisible();
+  29 |   await expect(homePage.logoutLink).toBeVisible();
+  30 |
+  31 |   await homePage.clickonLogout(); // CLick On logout button
+  32 | });
+  33 |
+  34 | test('@regression Validate if the "Account Settings" option is clickable ', async ({ page }) => {
+  35 |   const homePage = new HomePage(page);
+  36 |   await homePage.openAccountMenu();
+  37 |   await page.waitForTimeout(5000); // waits for 5000 milliseconds = 5 seconds
+  38 |   await homePage.clickonAccountSetting();// Click account Setting
+  39 |    await page.waitForTimeout(5000); // waits for 5000 milliseconds = 5 seconds
+  40 |    
+  41 |
+  42 | });
+  43 |
+  44 |
+  45 |
+  46 |
+  47 |
+```

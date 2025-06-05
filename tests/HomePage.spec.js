@@ -1,33 +1,22 @@
-const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../pages/LoginPage');
-const { HomePage } = require('../pages/HomePage');
-const config = require('../config/config');
-const testData = require('../data/testData');
+import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage.js';
+import { HomePage } from '../pages/HomePage.js';
+import { config } from '../config/config.js';
+import { testData } from '../data/testData.js';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(config.baseURL + '/login');
+  await page.goto(`${config.baseURL}/login`);
   const loginPage = new LoginPage(page);
   await loginPage.login(config.username, config.password);
 });
-
 test('@regression Validate that the Home Page title is correct, all menu options are available, and the user can successfully log out.', async ({ page }) => {
   const homePage = new HomePage(page);
-
-  // Assert page t
-  // itle
   await expect(page).toHaveTitle('Liongard | Relentless');
-
-  // Assert account menu is visible
-  await expect(homePage.accountMenu).toBeVisible();
-
-  // Click account menu to reveal dropdown options
-  await homePage.openAccountMenu();
-
-  // Assert dropdown links are visible
-  await expect(homePage.accountSettings).toBeVisible();
+  await expect(homePage.accountMenu).toBeVisible();// Assert account menu is visible
+  await homePage.openAccountMenu(); // Click account menu to reveal dropdown options
+  await expect(homePage.accountSettings).toBeVisible();// Assert dropdown links are visible
   await expect(homePage.companySettings).toBeVisible();
   await expect(homePage.logoutLink).toBeVisible();
-
   await homePage.clickonLogout(); // CLick On logout button
 });
 

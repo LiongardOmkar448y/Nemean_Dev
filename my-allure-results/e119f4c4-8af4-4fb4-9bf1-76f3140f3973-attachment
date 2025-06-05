@@ -1,0 +1,33 @@
+# Test info
+
+- Name: @regression Validate Account Details fields and fill the form
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:21:1
+
+# Error details
+
+```
+Error: page.goto: Test timeout of 30000ms exceeded.
+Call log:
+  - navigating to "https://nemean.appdev.liongard.com/login", waiting until "load"
+
+    at LoginPage.navigateTo (C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\utils\BasePage.js:9:21)
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:17:19
+```
+
+# Test source
+
+```ts
+   1 | const { expect } = require('@playwright/test');
+   2 |
+   3 | exports.BasePage = class BasePage {
+   4 |   constructor(page) {
+   5 |     this.page = page;
+   6 |   }
+   7 |
+   8 |   async navigateTo(url) {
+>  9 |     await this.page.goto(url);
+     |                     ^ Error: page.goto: Test timeout of 30000ms exceeded.
+  10 |   }
+  11 | };
+  12 |
+```

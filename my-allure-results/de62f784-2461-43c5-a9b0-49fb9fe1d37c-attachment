@@ -1,0 +1,147 @@
+# Test info
+
+- Name: @regression Validate Dropdown Options should display
+- Location: C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:33:1
+
+# Error details
+
+```
+Error: locator.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('//label[normalize-space()=\'Color Theme\']//following::div[@class=\'ant-select-selector\']')
+
+    at AccountPage.openColorThemeDropdown (C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\pages\AccountPage.js:72:35)
+    at C:\Users\OmkarAnkushYadav\OneDrive - cirruslabs.io\Desktop\Playwright Framework\LionGardDev_QA\tests\AccountPage.spec.js:37:23
+```
+
+# Page snapshot
+
+```yaml
+- banner:
+  - heading "Liongard Dev" [level=3]
+  - list:
+    - listitem:
+      - img
+      - textbox "Search..."
+      - img
+    - listitem:
+      - link "question-circle Support":
+        - /url: "#"
+        - img "question-circle"
+        - text: Support
+    - listitem:
+      - link "Admin":
+        - /url: "#"
+    - listitem: Reporting
+    - listitem:
+      - button "CHAT WITH US"
+    - listitem:
+      - link "Omkar Yadav":
+        - /url: "#"
+    - listitem:
+      - img "bars"
+- complementary:
+  - paragraph: Account Settings
+  - menu:
+    - menuitem "Profile"
+    - menuitem "Password"
+    - menuitem "Multi-Factor Authentication"
+    - menuitem "Access Tokens"
+    - menuitem "My Liongard Instance"
+- heading "Profile" [level=1]
+```
+
+# Test source
+
+```ts
+   1 | const { BasePage } = require('../utils/BasePage');
+   2 |
+   3 | exports.AccountPage = class AccountPage extends BasePage {
+   4 |   constructor(page) {
+   5 |     super(page);
+   6 |     this.page = page;
+   7 |   }
+   8 |
+   9 |   // Locators
+  10 |   get firstNameField() {
+  11 |     return this.page.locator('//input[@id="FirstName"]');
+  12 |   }
+  13 |
+  14 |   get lastNameField() {
+  15 |     return this.page.locator('//input[@id="LastName"]');
+  16 |   }
+  17 |
+  18 |   get usernameField() {
+  19 |     return this.page.locator('//input[@id="Username"]');
+  20 |   }
+  21 |
+  22 |   get applyButton() {
+  23 |     return this.page.locator('//button[normalize-space()="Apply"]');
+  24 |   }
+  25 |
+  26 |     get colorThemeDropdown() {
+  27 |     return this.page.locator("//label[normalize-space()='Color Theme']//following::div[@class='ant-select-selector']");
+  28 |   }
+  29 |
+  30 |   get lightModeOption() {
+  31 |     return this.page.locator("//div[contains(@class,'ant-select-item-option-content')][normalize-space()='Light Mode']");
+  32 |   }
+  33 |
+  34 |   get darkModeOption() {
+  35 |     return this.page.locator("//div[contains(@class,'ant-select-item-option-content')][normalize-space()='Dark Mode']");
+  36 |   }
+  37 |     get allThemeOptions() {
+  38 |     return this.page.locator("//div[contains(@class,'ant-select-item-option-content')]");
+  39 |   }
+  40 | get receiveTechUpdatesToggle() {
+  41 |   return this.page.locator('//button[@id="ReceiveTechUpdates"]');
+  42 | }
+  43 |  // Togle Button Validation -------------------------------------------------------------------------------
+  44 |  // Toggle the button
+  45 | async toggleReceiveTechUpdates() {
+  46 |   await this.receiveTechUpdatesToggle.click();
+  47 | }
+  48 |
+  49 | // Check current state (on = true / off = false)
+  50 | async isToggleOn() {
+  51 |   const ariaChecked = await this.receiveTechUpdatesToggle.getAttribute('aria-checked');
+  52 |   return ariaChecked === 'true';
+  53 | }
+  54 |
+  55 | // Ensure toggle is ON
+  56 | async ensureToggleIsOn() {
+  57 |   const isOn = await this.isToggleOn();
+  58 |   if (!isOn) {
+  59 |     await this.toggleReceiveTechUpdates();
+  60 |   }
+  61 | }
+  62 | // Ensure toggle is OFF
+  63 | async ensureToggleIsOff() {
+  64 |   const isOn = await this.isToggleOn();
+  65 |   if (isOn) {
+  66 |     await this.toggleReceiveTechUpdates();
+  67 |   }
+  68 | }
+  69 |  //------------------------------------------------------------------------------------------------------
+  70 |
+  71 |   async openColorThemeDropdown() {
+> 72 |     await this.colorThemeDropdown.click();
+     |                                   ^ Error: locator.click: Test timeout of 30000ms exceeded.
+  73 |   }
+  74 |   async getThemeOptionsText() {
+  75 |     return this.allThemeOptions.allTextContents();
+  76 |   }
+  77 |
+  78 |   // Actions Clear the text and enter Name lastname and username and click on apply button
+  79 |   async fillAccountDetails(firstName, lastName, username) {
+  80 |     await this.firstNameField.fill('');
+  81 |     await this.firstNameField.fill(firstName);
+  82 |     await this.lastNameField.fill('');
+  83 |     await this.lastNameField.fill(lastName);
+  84 |     await this.usernameField.fill('');
+  85 |     await this.usernameField.fill(username);
+  86 |     await this.applyButton.click();
+  87 |   }
+  88 | };
+  89 |
+```
